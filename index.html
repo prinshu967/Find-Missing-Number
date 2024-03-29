@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missing Number Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #5a5960;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #05f9dc;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(17, 1, 1, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            padding: 8px;
+            margin: 5px;
+            width: 80px;
+        }
+
+        button {
+            padding: 8px 20px;
+            margin-top: 10px;
+            background-color:blueviolet;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #00b315;
+        }
+
+        p#error {
+            color: red;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Missing Number Finder</h1>
+        <form id="missingNumberForm">
+            <label for="inputArray">Enter Array Elements (comma-separated):</label>
+            <input type="text" id="inputArray" name="inputArray" required>
+            <br>
+            <label for="inputN">Enter N:</label>
+            <input type="number" id="inputN" name="inputN" min="2" required>
+            <br>
+            <button type="button" onclick="findMissingNumber()">Find Missing Number</button>
+        </form>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function findMissingNumber() {
+            var inputArray = document.getElementById('inputArray').value.trim().split(',').map(Number);
+            var N = parseInt(document.getElementById('inputN').value);
+
+            if (inputArray.length !== N - 1) {
+                document.getElementById('result').textContent = 'Invalid input: Array length should be N - 1';
+                return;
+            }
+
+            var expectedSum = (N * (N + 1)) / 2;
+            var actualSum = inputArray.reduce((acc, curr) => acc + curr, 0);
+            var missingNumber = expectedSum - actualSum;
+
+            document.getElementById('result').textContent = 'Missing Number: ' + missingNumber;
+        }
+    </script>
+</body>
+</html>
